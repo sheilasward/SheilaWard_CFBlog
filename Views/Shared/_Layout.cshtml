@@ -1,0 +1,254 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Blog Listing</title>
+
+    @*<link href="~/css/royal_preloader.css" type="text/css" rel="stylesheet">
+
+        <link href="~/css/rev-slider-settings.css" type="text/css" rel="stylesheet">
+        <!-- MEGAFOLIO GALLERY  CSS -->
+        <link href="~/css/megafolio-style.css" type="text/css" rel="stylesheet">
+        <link href="~/css/megafolio-settings.css" type="text/css" rel="stylesheet">
+        <!-- Magnific Popup core CSS file -->
+        <link href="~/css/magnific-popup.css" type="text/css" rel="stylesheet">
+        <!-- Owl Carousel Assets -->
+        <link href="~/css/owl.carousel.css" type="text/css" rel="stylesheet">
+        <link href="~/css/owl.theme.css" type="text/css" rel="stylesheet">
+        <link href="~/css/owl.transitions.css" type="text/css" rel="stylesheet">*@
+
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+    <link href="~/Content/animate.css" rel="stylesheet" />
+    <link href="~/Content/prettify.css" rel="stylesheet" />
+
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/superfish.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/style-responsive.css" rel="stylesheet" />
+    <link href="~/Content/apps-reset.css" rel="stylesheet" />
+    <link href="~/Content/default-theme.css" rel="stylesheet" />
+
+    <link href="~/Content/blog.css" rel="stylesheet" />
+
+
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:900,300,200,100' rel='stylesheet' type='text/css'>
+
+</head>
+
+
+
+@*<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - My ASP.NET Application</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+
+    </head>*@
+
+
+<body class="blog-body">
+    <div class="navigation clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="navbar navbar-static-top">
+                        <div>
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                    <span class="fa fa-bars"></span>
+                                </button>
+                                <a class="sticky-logo" href="index.html">
+                                    <img src="~/images/coderFoundry2.png" alt="" />
+                                </a>
+                                @*@Html.ActionLink("Coder Foundry", "Index", "Home", new { area = "" }, new { @class = "navbar-brand app-brand" })*@
+                            </div>
+                            <div class="navbar-collapse collapse ddsmoothmenu" id="smoothmenu1">
+                                <ul class="nav navbar-nav top-nav sf-menu">
+                                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                    <li>@Html.ActionLink("BlogPosts", "Index", "BlogPosts")</li>
+
+                                    @*<li><a href="index.html#slides">Home</a></li>
+                                        <li><a href="index.html#about-me">About Me</a></li>
+                                        <li><a href="index.html#skill-section">Skill</a></li>
+                                        <li><a href="index.html#experiences">Experiences</a></li>
+                                        <li><a href="index.html#education">Education</a></li>
+                                        <li><a href="index.html#portfolio">Portfolio</a></li>
+                                        <li><a href="index.html#testimonial">Testimonial</a></li>
+                                        <li>
+                                            <a href="index.html#blog">Blog</a>
+                                            <ul>
+                                                <li><a href="index.html#blog">Blog List</a></li>
+                                                <li><a href="blog_listing.html" class="external">Blog Page</a></li>
+                                                <li><a href="blog_details.html" class="external">Blog Details Page</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="index.html#contact">Contact</a></li>*@
+
+                                </ul>
+                                @Html.Partial("_LoginPartial")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*<body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Coder Foundry", "Index", "Home", new { area = "" }, new { @class = "navbar-brand app-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("BlogPosts", "Index", "BlogPosts")</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+        </div>*@
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="wow slideInLeft">
+                        <p style="font-family: 'Dancing Script', cursive; padding: 10px; color: #F96963; font-size: 32px;">Sheila Ward</p>
+                        <p>
+                            5703 Davis Mill Rd <br />
+                            Greensboro, NC 27406
+                        </p>
+                        <div class="f-address">
+                            <p>
+                                <span>Email</span> : sheila.ward@email.com
+                            </p>
+                            <p>
+                                <span>Phone</span> : (336) 327-4914
+                            </p>
+                            <p>
+                                <span>Website</span> : <a href="#">www.starla-and-jeff.com</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="twitter-feed wow bounceIn">
+                        <img class="twt-avatar" src="~/Content/person.jpg" alt="" />
+                        <p>
+                            <a href="#" class="bold">Sheila Ward </a><span>about 21 min ago</span>
+                        </p>
+                        <p class="twt-txt">
+                            Hey Folks! Read all about Coder Foundry's new Launchpad Program! <a href="http://www.coderfoundry.com" target="_blank"> http://www.coderfoundry.com </a>
+                        </p>
+                    </div>
+                    <div class="twt-icon">
+                        <img src="~/Content/twt-icon.png" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    &copy; 2014 resumei. All Rights Reserved. Designed & powered by <a href="#">ThemeBucket</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <!-- jQuery v1.10.2  -->
+    <script src="~/js/jquery.js"></script>
+    <script src="~/js/royal_preloader.js"></script>
+
+    <!-- Bootstrap v3.1.0-->
+    <script src="~/js/bootstrap.js"></script>
+    <script src="~/js/jquery-ui-1.10.4.custom.min.js"></script>
+    <!-- jQuery REVOLUTION Slider -->
+    <script src="~/js/jquery.revslider.plugins.min.js"></script>
+    <script src="~/js/jquery.themepunch.revolution.js"></script>
+    <!-- Scroll Top-->
+    <script src="~/js/jquery.scrollUp.js"></script>
+    <!-- Easing Effect-->
+    <script src="~/js/jquery.easing.js"></script>
+    <!-- Knob-->
+    <script src="~/js/jquery.easypiechart.js"></script>
+    <!-- One Page Nav-->
+    <script src="~/js/jquery.nav.js"></script>
+    <!-- Scroll To-->
+    <script src="~/js/jquery.scrollTo.js"></script>
+    <!-- Sticky Nav-->
+    <script src="~/js/waypoints.js"></script>
+    <script src="~/js/waypoints-sticky.js"></script>
+    <!-- Elements Animation On Scroll -->
+    <script src="~/js/wow.js"></script>
+    <!-- jQuery Fittext -->
+    <script src="~/js/jquery.fittext.js"></script>
+    <!-- Appear Animation -->
+    <script src="~/js/jquery.appear.js"></script>
+    <!-- Masonry Grid -->
+    <script src="~/js/jquery.isotope.js"></script>
+    <!-- Smooth Scroll Effect -->
+    <script src="~/js/jquery.smooth-scroll.js"></script>
+    <!-- Google Map Api -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&AMP;sensor=false"></script>
+    <!-- MEGAFOLIO GALLERY  JS FILES  -->
+    <script src="~/js/jquery.megafolio.plugins.min.js"></script>
+    <script src="~/js/jquery.themepunch.megafoliopro.js"></script>
+    <!-- Magnific Popup core JS file -->
+    <script src="~/js/jquery.magnific-popup.js"></script>
+    <!-- jQuery OwlCarousel -->
+    <script src="~/js/owl.carousel.js"></script>
+    <!-- Drop Down Menu -->
+    <script src="~/js/hoverIntent.js"></script>
+    <script src="~/js/superfish.js"></script>
+    <!-- Syntax Highlighter -->
+    <script src="~/js/prettify.js"></script>
+    <!-- Flickr Feed -->
+    <script src="~/js/jflickrfeed.js"></script>
+    <!-- Plugins Initialize Scripts -->
+    <script src="~/js/scripts.js"></script>
+    <!-- Include required JS files -->
+    <script src="~/Scripts/SyntaxHighlighter/scripts/shCore.js"></script>
+    <script src="~/Scripts/SyntaxHighlighter/scripts/shBrushJScript.js"></script>
+    <script type="text/javascript">
+        SyntaxHighlighter.all()
+    </script>
+
+
+
+
+    <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+    <script src="~/Scripts/tinymce/jquery.tinymce.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            tinymce.init({
+                selector: '#Body'
+            });
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

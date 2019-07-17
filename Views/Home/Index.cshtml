@@ -1,0 +1,140 @@
+﻿@model SheilaWard_CFBlog.ViewModels.EmailModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="jumbotron">
+    <h1>ASP.NET</h1>
+    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>
+            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+            enables a clean separation of concerns and gives you full control over markup
+            for enjoyable, agile development.
+        </p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Get more libraries</h2>
+        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>
+</div>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div>
+        <!--section contact start-->
+        <div class="section-contact">
+            <div class="map-header" id="contact">
+                <div class="container">
+                    <span class="map-link">
+                        Click the envelope to send me an email...
+                    </span>
+                </div>
+            </div>
+            <div class="contact-map">
+                <div class="location-map"></div>
+                <div class="contact-form panel-hide wow bounceInUp">
+                    <div class="form-container">
+                        @*@using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <h3>Please fill in all information</h3>
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.TextBoxFor(m => m.FromName, new { @class = "form-control", placeholder = "Name" })
+                    @Html.ValidationMessageFor(m => m.FromName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.TextBoxFor(m => m.FromEmail, new { @class = "form-control", placeholder = "example@email.com" })
+                    @Html.ValidationMessageFor(m => m.FromEmail)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.TextBoxFor(m => m.Subject, new { @class = "form-control", placeholder = "Subject" })
+                    @Html.ValidationMessageFor(m => m.Subject)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.TextAreaFor(model => model.Body, new { @class = "form-control", placeholder = "Message" })
+                    @Html.ValidationMessageFor(m => m.Body)
+                </div>
+            </div>
+
+            <div class="col-md-12 form-group text-center">
+                <button type="submit" class="btn btn-read">
+                    Send Message
+                </button>
+            </div>
+        }*@
+
+                       @using (Html.BeginForm("Contact", "Home", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <!-- Name -->
+                                    <input type="text" name="name" id="name" class=" form-control" placeholder="Name *"
+                                           maxlength="100" required="">
+                                </div>
+
+                                <div class="col-md-12 form-group">
+                                    <!-- Email -->
+                                    <input type="email" name="email" id="email" class=" form-control" placeholder="Email *"
+                                           maxlength="100" required="">
+                                </div>
+
+                                <div class="col-md-12 form-group">
+                                    <!-- Subject -->
+                                    <input type="text" name="subject" id="subject" class=" form-control" placeholder="Subject "
+                                           maxlength="100">
+                                </div>
+
+                                <div class="col-md-12 form-group">
+                                    <!-- Comment -->
+                                    <textarea name="comments" id="comments" class=" form-control" placeholder="Comments"
+                                              maxlength="400"></textarea>
+                                </div>
+
+                                <div class="col-md-12 form-group text-center">
+                                    <button type="submit" class="btn btn-read ">
+                                        Send Message
+                                    </button>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+                <div class="toggle-contact-form wow bounceInUp">
+                    <a href="#" class="form-toggle-icon">
+                        <i class="fa fa-envelope-o"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--section contact end-->
+    </div>
+}
+
