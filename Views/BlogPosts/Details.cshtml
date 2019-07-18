@@ -78,9 +78,10 @@
                                     @comment.Author.DisplayName
                                 </h4>
                                 <div class="bl-status">
-                                    <span class="pull-left">About 10 Min ago</span>
-                                    <a href="#" class="pull-right reply">Reply</a>
-                                </div>
+                                    <span class="pull-left">
+                                        @comment.Created.ToString("M/d/yyyy - h:mmtt")
+                                    </span>
+                                 </div>
                                 <p class="mp-less">
                                     @comment.CommentBody
                                 </p>

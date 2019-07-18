@@ -20,6 +20,7 @@ namespace SheilaWard_CFBlog.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public AccountController()
         {
@@ -245,7 +246,27 @@ namespace SheilaWard_CFBlog.Controllers
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
 
-                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                //await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\"> here</a>.");
+
+                try
+                {
+                    var from = WebConfigurationManager.AppSettings["emailfrom"];
+                    var body = "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>.";
+                    var email = new MailMessage(from, model.Email)
+                    {
+                        Subject = "Reset Password",
+                        Body = body,
+                        IsBodyHtml = true
+                    };
+
+                    var svc = new PersonalEmail();
+                    await svc.SendAsync(email);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    await Task.FromResult(0);
+                }
 
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
@@ -265,9 +286,14 @@ namespace SheilaWard_CFBlog.Controllers
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
+        public ActionResult ResetPassword(string userId, string code)
         {
-            return code == null ? View("Error") : View();
+            var myResetPasswordVM = new ResetPasswordViewModel
+            {
+                Code = code,
+                Email = db.Users.Find(userId).Email
+            };
+            return code == null ? View("Error") : View(myResetPasswordVM);
         }
 
         //
