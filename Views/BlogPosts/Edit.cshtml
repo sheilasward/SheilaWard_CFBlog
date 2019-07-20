@@ -72,7 +72,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Post", "Details", new { slug = Model.Slug })
 </div>
 
 @section Scripts {

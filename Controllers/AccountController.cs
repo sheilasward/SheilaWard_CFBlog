@@ -179,10 +179,10 @@ namespace SheilaWard_CFBlog.Controllers
                     try
                     {
                         var from = WebConfigurationManager.AppSettings["emailfrom"];
-                        var body = "Please reset your password by clicking<a href=\"" + callbackUrl + "\">here</a>";
+                        var body = "Please confirm your email by clicking <a href=\"" + callbackUrl + "\">here.</a>";
                         var email = new MailMessage(from, model.Email)
                         {
-                            Subject = "Reset Password",
+                            Subject = "Confirm Email",
                             Body = body,
                             IsBodyHtml = true
                         };

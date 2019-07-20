@@ -19,14 +19,20 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-5">
-                               @if (item.MediaURL != null)
-                                {
                                 <div class="blog-img-sm">
-                                    <a href='@Url.Action("Details", "BlogPosts", new { slug = item.Slug })'>
-                                        <img class="img-responsive" src="@item.MediaURL" alt=""/>
-                                    </a>
+                                    @if (item.MediaURL == null)
+                                    {
+                                        <a href='@Url.Action("Details", "BlogPosts", new { slug = item.Slug })'>
+                                            <img class="img-responsive" src="~/Content/defaultImage.jpg" alt="" />
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href='@Url.Action("Details", "BlogPosts", new { slug = item.Slug })'>
+                                            <img class="img-responsive" src="@item.MediaURL" alt="" />
+                                        </a>
+                                    }
                                 </div>
-                                }
                             </div>
                             <div class="col-md-7">
                                 <h1>

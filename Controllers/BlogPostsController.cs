@@ -28,11 +28,11 @@ namespace SheilaWard_CFBlog.Controllers
             var user = userManager.FindByName(User.Identity.Name);
             if (user != null && user.Email == "admin@myblog.com")
             {
-                return View(blogPosts.ToList());
+                return View(blogPosts.OrderByDescending(b => b.Created).ToList());
             }
             else
             {
-                return View(blogPosts.Where(b => b.Published).ToList());
+                return View(blogPosts.Where(b => b.Published).OrderByDescending(b => b.Created).ToList());
             }
             
         }

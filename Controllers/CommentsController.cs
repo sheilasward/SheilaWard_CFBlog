@@ -47,9 +47,7 @@ namespace SheilaWard_CFBlog.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            ViewBag.AuthorId = new SelectList(db.ApplicationUsers, "Id", "DisplayName");
-            ViewBag.BlogPostId = new SelectList(db.BlogPosts, "Id", "Title");
-            return View();
+           return View();
         }
 
         // POST: Comments/Create
@@ -64,7 +62,7 @@ namespace SheilaWard_CFBlog.Controllers
             {
                 // comment.Body = CommentBody;
                 comment.Created = DateTimeOffset.Now;
-                comment.AuthorId = userManager.FindByName(User.Identity.Name).Id;    // User.Identity.GetUserId();
+                comment.AuthorId = User.Identity.GetUserId();
                 //comment.AuthorName = userManager.FindByName(User.Identity.Name).DisplayName;
                 db.Comments.Add(comment);
                 db.SaveChanges();
@@ -72,12 +70,11 @@ namespace SheilaWard_CFBlog.Controllers
                 return RedirectToAction("Details", "BlogPosts", new { slug = slug });
             }
 
-            ViewBag.AuthorId = new SelectList(db.ApplicationUsers, "Id", "FirstName", comment.AuthorId);
-            ViewBag.BlogPostId = new SelectList(db.BlogPosts, "Id", "Title", comment.BlogPostId);
             return View(comment);
         }
 
         // GET: Comments/Edit/5
+        
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -89,9 +86,10 @@ namespace SheilaWard_CFBlog.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AuthorId = new SelectList(db.ApplicationUsers, "Id", "FirstName", comment.AuthorId);
-            ViewBag.BlogPostId = new SelectList(db.BlogPosts, "Id", "Title", comment.BlogPostId);
+            var postId = db.Comments.Find(id).BlogPostId;
+            ViewBag.Slug = db.Posts.Find(postId).Slug;
             return View(comment);
+
         }
 
         // POST: Comments/Edit/5
@@ -106,11 +104,10 @@ namespace SheilaWard_CFBlog.Controllers
                 comment.Updated = DateTimeOffset.Now;
                 db.Entry(comment).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                var slug = db.Posts.Find(comment.BlogPostId).Slug;
+                return RedirectToAction("Details", "BlogPosts", new { slug = slug });
             }
-            ViewBag.AuthorId = new SelectList(db.ApplicationUsers, "Id", "DisplayName", comment.AuthorId);
-            ViewBag.BlogPostId = new SelectList(db.BlogPosts, "Id", "Title", comment.BlogPostId);
-            return View(comment);
+            return View("BlogPosts", "Details");
         }
 
         // GET: Comments/Delete/5
