@@ -10,6 +10,7 @@ using SheilaWard_CFBlog.Models;
 
 namespace SheilaWard_CFBlog.Controllers
 {
+    [RequireHttps]
     [Authorize]
     public class ManageController : Controller
     {

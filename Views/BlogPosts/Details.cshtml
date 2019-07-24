@@ -7,11 +7,12 @@
     ViewBag.Title = "Details";
 }
 
-<div class="blog-section">
+
     <div class="section-title">
         <h1 class="section-heading">Blog Details</h1>
         <h2 class="section-subheading-nobg">@Model.Title</h2>
     </div>
+
     <div class="row blog">
         <div class="col-md-8">
             <div class="panel">
@@ -142,11 +143,18 @@
 
         <div class="col-md-4">
             <div class="panel">
-                <div class="panel-body">
-                    <input type="text" placeholder="Search Blog" class="form-control blog-search">
-                    <button class="btn btn-search"><i class="fa fa-search"></i></button>
-                </div>
+
+                @using (Html.BeginForm("Index", "BlogPosts", FormMethod.Get, htmlAttributes: new { @class = "form" }))
+                {
+                    <div class="panel-body">
+                        <input type="text" placeholder="Search Blog" name="searchStr" id="searchStr" class="form-control blog-search">
+                        <button name="searchStr" id="searchStr" class="btn btn-search"><i class="fa fa-search"></i></button>
+                    </div>
+                }
+
+
             </div>
+
             <div class="panel">
                 <div class="panel-body">
                     <div class="blog-post">
@@ -230,4 +238,4 @@
             </div>
         </div>
     </div>
-</div>
+

@@ -16,6 +16,7 @@ using SheilaWard_CFBlog.Models;
 namespace SheilaWard_CFBlog.Controllers
 {
     [Authorize]
+    [RequireHttps]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;

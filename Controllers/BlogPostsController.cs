@@ -11,30 +11,53 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using SheilaWard_CFBlog.Helpers;
 using SheilaWard_CFBlog.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace SheilaWard_CFBlog.Controllers
 {
     [Authorize(Roles = "Admin")]
+    [RequireHttps]
     public class BlogPostsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: BlogPosts
         [AllowAnonymous]
-        public ActionResult Index()
+        public ActionResult Index(int? page, string searchStr)  // The signature is "nullable int" and "string"
         {
-            var blogPosts = db.Posts.Include(b => b.Author);
-            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
-            var user = userManager.FindByName(User.Identity.Name);
-            if (user != null && user.Email == "admin@myblog.com")
+            ViewBag.Search = searchStr;
+            var blogList = IndexSearch(searchStr);
+            var pageSize = 2;
+            var pageNumber = page ?? 1;
+
+            //var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+            //var user = userManager.FindByName(User.Identity.Name);
+            //if (user != null && user.Email == "admin@myblog.com")
+            //{
+            //    return View(db.Posts.OrderByDescending(b => b.Created).ToPagedList(pageNumber, pageSize));
+            //}
+            //else
+            //{
+            //    return View(db.Posts.Where(b => b.Published).OrderByDescending(b => b.Created).ToPagedList(pageNumber, pageSize));
+            //}
+            return View(blogList.ToPagedList(pageNumber, pageSize));
+        }
+
+        public IQueryable<BlogPost> IndexSearch(string searchStr)
+        {
+            var result = db.Posts.AsQueryable();
+            if (searchStr != null)
             {
-                return View(blogPosts.OrderByDescending(b => b.Created).ToList());
+                result = result.Where(p => p.Title.Contains(searchStr) ||
+                                           p.Body.Contains(searchStr) ||
+                                           p.Comments.Any(c => c.CommentBody.Contains(searchStr) ||
+                                                               c.Author.FirstName.Contains(searchStr) ||
+                                                               c.Author.LastName.Contains(searchStr) ||
+                                                               c.Author.DisplayName.Contains(searchStr) ||
+                                                               c.Author.Email.Contains(searchStr)));
             }
-            else
-            {
-                return View(blogPosts.Where(b => b.Published).OrderByDescending(b => b.Created).ToList());
-            }
-            
+            return result.OrderByDescending(p => p.Created);
         }
 
         // GET: BlogPosts/Details/5

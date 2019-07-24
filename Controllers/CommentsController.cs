@@ -12,6 +12,7 @@ using SheilaWard_CFBlog.Models;
 
 namespace SheilaWard_CFBlog.Controllers
 {
+    [RequireHttps]
     public class CommentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

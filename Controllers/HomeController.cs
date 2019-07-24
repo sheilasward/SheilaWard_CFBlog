@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace SheilaWard_CFBlog.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
         public ActionResult Index()

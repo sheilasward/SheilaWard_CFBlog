@@ -1,15 +1,18 @@
-﻿@model IEnumerable<SheilaWard_CFBlog.Models.BlogPost>
-
+﻿@using PagedList;
+@using PagedList.Mvc
+@using SheilaWard_CFBlog.Models;
+@model IPagedList<BlogPost>
 @{
     ViewBag.Title = "Blog Posts";
 }
 
 
-<div class="blog-section">
+
     <div class="section-title">
         <h1 class="section-heading">Blog</h1>
         <h2 class="section-subheading-nobg">My Experiences at Coder Foundry Bootcamp</h2>
     </div>
+
     <div class="row blog">
         <div class="col-md-8">
 
@@ -63,53 +66,32 @@
                 </div>
             </div>
 
-            <div class="panel">
-                <div class="panel-body">
-                    <div id="c-slide" class="carousel slide auto">
-                        <ol class="carousel-indicators out">
-                            <li class="active" data-slide-to="0" data-target="#c-slide"></li>
-                            <li data-slide-to="1" data-target="#c-slide"></li>
-                            <li data-slide-to="2" data-target="#c-slide"></li>
-                        </ol>
-                        <div class="carousel-inner blog-img-wide">
-                            <div class="item text-center active">
-
-                                <img src="~/images/blog-wide-img.jpg" alt="" />
-                            </div>
-                            <div class="item text-center">
-
-                                <img src="~/images/blog-wide-img.jpg" alt="" />
-                            </div>
-                            <div class="item text-center">
-
-                                <img src="~/images/blog-wide-img.jpg" alt="" />
-                            </div>
-                        </div>
-                    </div>
-                    <h1><a href="blog_details.html">Neque porro quisquam est qui dolo rem ipsum quio</a></h1>
-                    <p class="auth-row">
-                        By <a href="#">Anthony Jones</a> | 27 December 2014 | <a href="#">5 Comments</a>
-                    </p>
-                </div>
-            </div>
             <div class="text-center">
                 <ul class="pagination">
-                    <li><a href="#">PREV</a></li>
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchStr = ViewBag.Search }));
+                    @*Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount  @Html.PagedListPager(Model, page => Url.Action("Index", new { page }));*@
+                    @*<li><a href="#">PREV</a></li>
                     <li class="active"><a href="#">1</a></li>
                     <li><a href="#">2</a></li>
                     <li><a href="#">3</a></li>
                     <li><a href="#">4</a></li>
                     <li><a href="#">5</a></li>
-                    <li><a href="#">NEXT</a></li>
+                    <li><a href="#">NEXT</a></li>*@
                 </ul>
             </div>
         </div>
         <div class="col-md-4">
             <div class="panel">
-                <div class="panel-body">
-                    <input type="text" placeholder="Search Blog" class="form-control blog-search">
-                    <button class="btn btn-search"><i class="fa fa-search"></i></button>
-                </div>
+                
+                @using (Html.BeginForm ("Index", "BlogPosts", FormMethod.Get, htmlAttributes: new { @class="form" }))
+                {
+                    <div class="panel-body">
+                        <input type="text" placeholder="Search Blog" name="searchStr" id="searchStr" class="form-control blog-search">
+                        <button name="searchStr" id="searchStr" class="btn btn-search"><i class="fa fa-search"></i></button>
+                    </div>
+                }
+                    
+                
             </div>
             <div class="panel">
                 <div class="panel-body">
@@ -197,5 +179,8 @@
             </div>
         </div>
     </div>
-</div>
+   
+        
+    
+
  
