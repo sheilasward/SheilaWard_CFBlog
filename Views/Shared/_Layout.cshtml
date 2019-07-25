@@ -62,10 +62,18 @@
                                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                                     <span class="fa fa-bars"></span>
                                 </button>
-                                <a class="sticky-logo" href="index.html">
+
+                                <a class="sticky-logo" href='@Url.Action("Index", "Home")'>
                                     <img src="~/images/coderFoundry2.png" alt="" />
                                 </a>
-                                @*@Html.ActionLink("Coder Foundry", "Index", "Home", new { area = "" }, new { @class = "navbar-brand app-brand" })*@
+
+                                    @*<a class="sticky-logo" href="index.html">
+                                        <img src="~/images/coderFoundry2.png" alt="" />
+                                    </a>*@
+
+
+
+                                    @*@Html.ActionLink("Coder Foundry", "Index", "Home", new { area = "" }, new { @class = "navbar-brand app-brand" })*@
                             </div>
                             <div class="navbar-collapse collapse ddsmoothmenu" id="smoothmenu1">
                                 <ul class="nav navbar-nav top-nav sf-menu">
