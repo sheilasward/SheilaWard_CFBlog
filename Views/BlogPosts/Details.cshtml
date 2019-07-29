@@ -98,8 +98,10 @@
                                 </p>
                                 @if (comment.AuthorId == User.Identity.GetUserId() || User.IsInRole("Moderator") || User.IsInRole("Admin"))
                                 {
-                                    <br/>
+                                    <br />
                                     @Html.ActionLink("Edit", "Edit", "Comments", new { id = comment.Id }, new { @class = "btn btn-small btn-share" })
+                                    <span>&emsp;</span>
+                                    @Html.ActionLink("Delete", "Delete", "Comments", new { id = comment.Id }, new { @class = "btn btn-small btn-share" })
                                 }
                             </div>
                         </div>
