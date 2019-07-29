@@ -1,6 +1,6 @@
 ﻿@using SheilaWard_CFBlog.Models
 @using Microsoft.AspNet.Identity
-@model BlogPost
+@model SheilaWard_CFBlog.ViewModels.DetailVM
 
 
 @{
@@ -10,19 +10,19 @@
 
     <div class="section-title">
         <h1 class="section-heading">Blog Details</h1>
-        <h2 class="section-subheading-nobg">@Model.Title</h2>
+        <h2 class="section-subheading-nobg">@Model.blogPost.Title</h2>
     </div>
 
     <div class="row blog">
         <div class="col-md-8">
             <div class="panel">
                 <div class="panel-body">
-                    <h1 class="text-center mtop35"><a href="#">@Model.Abstract</a></h1>
+                    <h1 class="text-center mtop35"><a href="#">@Model.blogPost.Abstract</a></h1>
                     <p class="text-center auth-row">
-                        By Sheila Ward | @Model.Created.ToString("MM/dd/yyyy") | @Model.Comments.Count comments
+                        By Sheila Ward | @Model.blogPost.Created.ToString("MM/dd/yyyy") | @Model.blogPost.Comments.Count comments
                     </p>
 
-                    @if (Model.MediaURL == null)
+                    @if (Model.blogPost.MediaURL == null)
                     {
                         <div class="blog-img-wide">
                             <img class="img-responsive" src="~/Content/defaultImage.jpg" alt="" />
@@ -31,20 +31,20 @@
                     else
                     {
                         <div class="blog-img-wide">
-                            <img class="img-responsive" src="@Model.MediaURL" alt="" />
+                            <img class="img-responsive" src="@Model.blogPost.MediaURL" alt="" />
                         </div>
                     }
 
                     <p>
-                        @Html.Raw(Model.Body)
+                        @Html.Raw(Model.blogPost.Body)
                     </p>
 
                     @if (ViewContext.HttpContext.User.IsInRole("Admin"))
                     {
 
                         <div class="btn-toolbar">
-                            @Html.ActionLink("Update", "Edit", "BlogPosts", new { slug = Model.Slug }, new { @class = "btn btn-share" })
-                            @Html.ActionLink("Delete", "Delete", "BlogPosts", new { id = Model.Id }, new { @class = "btn btn-share" })
+                            @Html.ActionLink("Update", "Edit", "BlogPosts", new { slug = Model.blogPost.Slug }, new { @class = "btn btn-share" })
+                            @Html.ActionLink("Delete", "Delete", "BlogPosts", new { slug = Model.blogPost.Slug }, new { @class = "btn btn-share" })
                         </div>
 
                     }
@@ -76,8 +76,8 @@
             </div>
             <div class="panel">
                 <div class="panel-body">
-                    <h1 class="text-center cmnt-head">@Model.Comments.Count Comment(s)</h1>
-                   @foreach (Comment comment in Model.Comments.OrderByDescending(c => c.Created))
+                    <h1 class="text-center cmnt-head">@Model.blogPost.Comments.Count Comment(s)</h1>
+                   @foreach (Comment comment in Model.blogPost.Comments.OrderByDescending(c => c.Created))
                     {
                         <div class="media blog-cmnt">
                             <a href="javascript:;" class="pull-left">
@@ -112,8 +112,8 @@
                                 @using (Html.BeginForm("Create", "Comments", FormMethod.Post))
                                 {
                                     @Html.AntiForgeryToken()
-                                    @Html.Hidden("BlogPostId", Model.Id)
-                                    @Html.HiddenFor(model => model.Slug)
+                                    @Html.Hidden("BlogPostId", Model.blogPost.Id)
+                                    @Html.HiddenFor(model => model.blogPost.Slug)
                                     <div class="row">
                                         <div class="col-md-12">
                                             <h1 class="text-center cmnt-head ">Leave a Comment</h1>
@@ -133,7 +133,6 @@
                         <div class="panel">
                             <div class="panel-body">
                                 @Html.ActionLink("Please login to make comments", "Login", "Account")
-                                @*<h3>Please login to make comments</h3>*@
                             </div>
                         </div>
                     }
@@ -158,39 +157,30 @@
             <div class="panel">
                 <div class="panel-body">
                     <div class="blog-post">
-                        <h3>Latest Blog Post</h3>
-                        <div class="media">
-                            <a href="javascript:;" class="pull-left">
-                                <img alt="" src="img/blog/blog-thumb-1.jpg">
-                            </a>
-                            <div class="media-body">
-                                <h5 class="media-heading"><a href="javascript:;">02 May 2013 </a></h5>
-                                <p>
-                                    Donec id elit non mi porta gravida at eget metus amet int
-                                </p>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <a href="javascript:;" class="pull-left">
-                                <img alt="" src="img/blog/blog-thumb-2.jpg">
-                            </a>
-                            <div class="media-body">
-                                <h5 class="media-heading"><a href="javascript:;">02 May 2013 </a></h5>
-                                <p>
-                                    Donec id elit non mi porta gravida at eget metus amet int
-                                </p>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <a href="javascript:;" class="pull-left">
-                                <img alt="" src="img/blog/blog-thumb-3.jpg">
-                            </a>
-                            <div class="media-body">
-                                <h5 class="media-heading"><a href="javascript:;">02 May 2013 </a></h5>
-                                <p>
-                                    Donec id elit non mi porta gravida at eget metus amet int
-                                </p>
-                            </div>
+                        <h3>Latest Blog Posts</h3>
+                        <div>
+                           @foreach (var item in Model.recentPosts)
+                            {
+                                <div class="media">
+                               @if (item.MediaURL == null)
+                                {
+                                    <a href="javascript:;" class="pull-left">
+                                        <img class="img-thumbnail" src="~/Content/defaultImage.jpg" alt="" />
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="javascript:;" class="pull-left">
+                                        <img class="img-thumbnail" src="@item.MediaURL" alt="" />
+                                    </a>
+                                }
+                                    <div class="media-body">
+                                        <h5 class="media-heading"><a href="javascript:;">@item.Created.ToString("MM/dd/yyyy") </a></h5>
+                                        <p>@item.Title</p>
+
+                                    </div>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
@@ -200,24 +190,10 @@
                     <div class="blog-post">
                         <h3>recent comments</h3>
                         <ul>
-                            <li><a href="javascript:;"><i class=" fa fa-comments-o"></i> admin on Vestiblulum quis dolor </a></li>
-                            <li><a href="javascript:;"><i class=" fa fa-comments-o"></i> admin on Nam sed arcu tellus</a></li>
-                            <li><a href="javascript:;"><i class=" fa fa-comments-o"></i> monster002 on Fringilla ut vel ipsum </a></li>
-                            <li><a href="javascript:;"><i class=" fa fa-comments-o"></i> admin on Vestiblulum quis dolor sit</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="panel">
-                <div class="panel-body">
-                    <div class="blog-post">
-                        <h3>category</h3>
-                        <ul>
-                            <li><a href="javascript:;"><i class=" fa fa-angle-right"></i> Animals</a></li>
-                            <li><a href="javascript:;"><i class=" fa fa-angle-right"></i> Landscape</a></li>
-                            <li><a href="javascript:;"><i class=" fa fa-angle-right"></i> Portait</a></li>
-                            <li><a href="javascript:;"><i class=" fa fa-angle-right"></i> Wild Life</a></li>
-                            <li><a href="javascript:;"><i class=" fa fa-angle-right"></i> Video</a></li>
+                            @foreach (var item in Model.recentComments)
+                            {
+                                <li><a href="javascript:;"><h5 class="comments"><i class=" fa fa-comments-o"></i> @item.CommentBody </h5></a></li>
+                            }
                         </ul>
                     </div>
                 </div>

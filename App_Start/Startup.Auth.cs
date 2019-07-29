@@ -7,6 +7,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using SheilaWard_CFBlog.Models;
+using Owin.Security.Providers.LinkedIn;
 
 namespace SheilaWard_CFBlog
 {
@@ -65,6 +66,11 @@ namespace SheilaWard_CFBlog
                 ClientId = WebConfigurationManager.AppSettings["ClientId"],
                 ClientSecret = WebConfigurationManager.AppSettings["ClientSecret"]
             });
+
+            app.UseLinkedInAuthentication(
+                clientId: WebConfigurationManager.AppSettings["LinkedInId"],
+                clientSecret: WebConfigurationManager.AppSettings["LinkedInSecret"]
+            );
         }
     }
 }

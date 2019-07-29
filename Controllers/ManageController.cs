@@ -334,7 +334,17 @@ namespace SheilaWard_CFBlog.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        //
+        // GET: /Manage/RecentComments
+        public ActionResult RecentComments()
+        {
+            var db = new ApplicationDbContext();
+            var recentComments = new RecentCommentsVM();
+            recentComments.RecentComments = db.Comments.OrderByDescending(c => c.Created).Take(4).ToList();
+            return View(recentComments);
+        }
+
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 

@@ -13,6 +13,7 @@ using SheilaWard_CFBlog.Helpers;
 using SheilaWard_CFBlog.Models;
 using PagedList;
 using PagedList.Mvc;
+using SheilaWard_CFBlog.ViewModels;
 
 namespace SheilaWard_CFBlog.Controllers
 {
@@ -73,7 +74,14 @@ namespace SheilaWard_CFBlog.Controllers
             {
                 return HttpNotFound();
             }
-            return View(blogPost);
+
+            var detailVM = new DetailVM();
+            detailVM.blogPost = blogPost;
+            detailVM.recentPosts = db.Posts.Where(p => p.Published && slug != p.Slug).OrderByDescending(c => c.Created).Take(3).ToList();
+            detailVM.recentComments = db.Comments.Where(c => c.CommentBody != null).OrderByDescending(c => c.Created).Take(4).ToList();
+
+
+            return View(detailVM);
         }
 
 

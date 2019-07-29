@@ -1774,6 +1774,11 @@ blockquote {
     text-transform: uppercase;
 }
 
+.comments h5 {
+    display: inline-block;
+    line-height: 1em;
+}
+
 ol.comment-list {
     list-style: none;
     padding-left: 0;

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
@@ -82,5 +83,20 @@ namespace SheilaWard_CFBlog.Models
     {
         public string SelectedProvider { get; set; }
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
+    }
+
+    public class RecentCommentsVM : IEnumerable<Comment>
+    {
+        public ICollection<Comment> RecentComments { get; set; }
+
+        public IEnumerator<Comment> GetEnumerator()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

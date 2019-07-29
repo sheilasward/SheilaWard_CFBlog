@@ -1,6 +1,7 @@
 ﻿@using PagedList;
 @using PagedList.Mvc
 @using SheilaWard_CFBlog.Models;
+@using SheilaWard_CFBlog.Helpers;
 @model IPagedList<BlogPost>
 @{
     ViewBag.Title = "Blog Posts";
@@ -82,16 +83,16 @@
         </div>
         <div class="col-md-4">
             <div class="panel">
-                
-                @using (Html.BeginForm ("Index", "BlogPosts", FormMethod.Get, htmlAttributes: new { @class="form" }))
+
+                @using (Html.BeginForm("Index", "BlogPosts", FormMethod.Get, htmlAttributes: new { @class = "form" }))
                 {
                     <div class="panel-body">
                         <input type="text" placeholder="Search Blog" name="searchStr" id="searchStr" class="form-control blog-search">
                         <button name="searchStr" id="searchStr" class="btn btn-search"><i class="fa fa-search"></i></button>
                     </div>
                 }
-                    
-                
+
+
             </div>
             <div class="panel">
                 <div class="panel-body">
@@ -99,7 +100,7 @@
                         <h3>Latest Blog Post</h3>
                         <div class="media">
                             <a href="javascript:;" class="pull-left">
-                                <img src="~/images/blog-thumb-1.jpg" alt="" class=" "/>
+                                <img src="~/images/blog-thumb-1.jpg" alt="" class=" " />
 
                             </a>
                             <div class="media-body">
@@ -111,7 +112,7 @@
                         </div>
                         <div class="media">
                             <a href="javascript:;" class="pull-left">
-                                <img alt="" src="~/images/blog-thumb-2.jpg" class=" "/>
+                                <img alt="" src="~/images/blog-thumb-2.jpg" class=" " />
 
                             </a>
                             <div class="media-body">
@@ -124,7 +125,7 @@
                         <div class="media">
                             <a href="javascript:;" class="pull-left">
                                 <img alt="" src="~/images/blog-thumb-3.jpg" class=" " />
-                                        
+
                             </a>
                             <div class="media-body">
                                 <h5 class="media-heading"><a href="javascript:;">02 May 2013 </a></h5>
@@ -136,19 +137,22 @@
                     </div>
                 </div>
             </div>
-            <div class="panel">
-                <div class="panel-body">
-                    <div class="blog-post">
-                        <h3>recent comments</h3>
-                        <ul>
-                            <li><a href="javascript:;"><i class=" fa fa-comments-o"></i> admin on Vestiblulum quis dolor </a></li>
-                            <li><a href="javascript:;"><i class=" fa fa-comments-o"></i> admin on Nam sed arcu tellus</a></li>
-                            <li><a href="javascript:;"><i class=" fa fa-comments-o"></i> monster002 on Fringilla ut vel ipsum </a></li>
-                            <li><a href="javascript:;"><i class=" fa fa-comments-o"></i> admin on Vestiblulum quis dolor sit</a></li>
-                        </ul>
-                    </div>
+
+            @Html.Partial("_RecentCommentsPartial", DataUtilities.GetComments())
+
+            @*<div class="panel">
+            <div class="panel-body">
+                <div class="blog-post">
+                    <h3>recent comments</h3>
+                    <ul>
+                        <li><a href="javascript:;"><i class=" fa fa-comments-o"></i> admin on Vestiblulum quis dolor </a></li>
+                        <li><a href="javascript:;"><i class=" fa fa-comments-o"></i> admin on Nam sed arcu tellus</a></li>
+                        <li><a href="javascript:;"><i class=" fa fa-comments-o"></i> monster002 on Fringilla ut vel ipsum </a></li>
+                        <li><a href="javascript:;"><i class=" fa fa-comments-o"></i> admin on Vestiblulum quis dolor sit</a></li>
+                    </ul>
                 </div>
             </div>
+        </div>*@
             <div class="panel">
                 <div class="panel-body">
                     <div class="blog-post">
