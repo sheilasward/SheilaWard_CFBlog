@@ -1,0 +1,33 @@
+﻿@model IEnumerable<SheilaWard_CFBlog.Models.BlogPost>
+
+<div class="panel">
+    <div class="panel-body">
+        <div class="blog-post">
+            <h3>Latest Blog Posts</h3>
+            <div>
+                @foreach (var item in Model)
+                {
+                    <div class="media">
+                        @if (item.MediaURL == null)
+                        {
+                            <a href="javascript:;" class="pull-left">
+                                <img class="img-thumbnail" src="~/Content/defaultImage.jpg" alt="" />
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="javascript:;" class="pull-left">
+                                <img class="img-thumbnail" src="@item.MediaURL" alt="" />
+                            </a>
+                        }
+                        <div class="media-body">
+                            <h5 class="media-heading"><a href="javascript:;">@item.Created.ToString("MM/dd/yyyy")</a></h5>
+                            <p>@item.Title</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

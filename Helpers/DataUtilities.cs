@@ -14,5 +14,10 @@ namespace SheilaWard_CFBlog.Helpers
             return db.Comments.OrderByDescending(c => c.Created).Take(4).ToList();
 
         }
+
+        public static List<BlogPost> GetBlogPosts()
+        {
+            return db.Posts.OrderByDescending(c => c.Created).Take(3).ToList();
+        }
     }
 }

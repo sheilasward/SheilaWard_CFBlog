@@ -102,6 +102,13 @@ namespace SheilaWard_CFBlog.Controllers
         {
             if (ModelState.IsValid)
             {
+                //if(User.IsInRole("Admin") || User.IsInRole("Moderator") && Comment.UpdateReason == null)
+                //{
+                //    {
+                //        ModelState.AddModelError("UpdateReason", "An Update reason is required!");
+                //        return View(comment);
+                //    }
+                //}
                 comment.Updated = DateTimeOffset.Now;
                 db.Entry(comment).State = EntityState.Modified;
                 db.SaveChanges();

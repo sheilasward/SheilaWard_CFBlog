@@ -703,6 +703,7 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\BlogPosts\_RecentCommentsPartial.cshtml" />
+    <Content Include="Views\BlogPosts\_RecentBlogPostsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
