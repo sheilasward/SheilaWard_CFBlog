@@ -11,5 +11,6 @@ namespace SheilaWard_CFBlog.ViewModels
         public BlogPost blogPost { get; set; }
         public ICollection<BlogPost> recentPosts { get; set; }
         public ICollection<Comment> recentComments { get; set; }
+        public ICollection<BlogPost> archivePosts { get; set; }
     }
 }

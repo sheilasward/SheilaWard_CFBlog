@@ -79,6 +79,7 @@ namespace SheilaWard_CFBlog.Controllers
             detailVM.blogPost = blogPost;
             detailVM.recentPosts = db.Posts.Where(p => p.Published && slug != p.Slug).OrderByDescending(c => c.Created).Take(3).ToList();
             detailVM.recentComments = db.Comments.Where(c => c.CommentBody != null).OrderByDescending(c => c.Created).Take(4).ToList();
+            //detailVM.archivePosts = db.Posts.Where(p => p.Published).OrderByDescending(c => c.Created).GroupBy(c => c.Created.ToString("MMM/yyyy")).ToList();
 
 
             return View(detailVM);

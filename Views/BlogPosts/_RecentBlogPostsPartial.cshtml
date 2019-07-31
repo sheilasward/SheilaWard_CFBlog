@@ -7,24 +7,25 @@
             <div>
                 @foreach (var item in Model)
                 {
-                    <div class="media">
-                        @if (item.MediaURL == null)
-                        {
-                            <a href="javascript:;" class="pull-left">
-                                <img class="img-thumbnail" src="~/Content/defaultImage.jpg" alt="" />
-                            </a>
-                        }
-                        else
-                        {
-                            <a href="javascript:;" class="pull-left">
-                                <img class="img-thumbnail" src="@item.MediaURL" alt="" />
-                            </a>
-                        }
-                        <div class="media-body">
-                            <h5 class="media-heading"><a href="javascript:;">@item.Created.ToString("MM/dd/yyyy")</a></h5>
-                            <p>@item.Title</p>
-                        </div>
+                <div class="media">
+                    @if (item.MediaURL == null)
+                    {
+                       
+                        <a href="javascript:;" class="pull-left">
+                            <img style="width:120px;" src="~/Content/defaultImage.jpg" alt="" />
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="javascript:;" class="pull-left">
+                            <img style="width:120px;" src="@item.MediaURL" alt="" />
+                        </a>
+                    }
+                    <div class="media-body">
+                        <h5 class="media-heading">@item.Created.ToString("MM/dd/yyyy")</h5>
+                        <p style="color:#837f7e; line-height:1em;">@Html.ActionLink(item.Title, "Details", new { slug = item.Slug })</p>
                     </div>
+                </div>
                 }
             </div>
         </div>

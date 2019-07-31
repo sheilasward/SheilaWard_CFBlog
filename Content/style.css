@@ -1777,6 +1777,7 @@ blockquote {
 .comments h5 {
     display: inline-block;
     line-height: 1em;
+    font-weight: 700;
 }
 
 ol.comment-list {

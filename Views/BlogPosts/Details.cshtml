@@ -7,7 +7,6 @@
     ViewBag.Title = "Details";
 }
 
-
     <div class="section-title">
         <h1 class="section-heading">Blog Details</h1>
         <h2 class="section-subheading-nobg">@Model.blogPost.Title</h2>
@@ -96,13 +95,14 @@
                                 <p class="mp-less">
                                     @comment.CommentBody
                                 </p>
-                                @if (comment.AuthorId == User.Identity.GetUserId() || User.IsInRole("Moderator") || User.IsInRole("Admin"))
+                                @if ((comment.AuthorId == User.Identity.GetUserId() && comment.UpdateReason == null) || User.IsInRole("Moderator") || User.IsInRole("Admin"))
                                 {
                                     <br />
                                     @Html.ActionLink("Edit", "Edit", "Comments", new { id = comment.Id }, new { @class = "btn btn-small btn-share" })
                                     <span>&emsp;</span>
                                     @Html.ActionLink("Delete", "Delete", "Comments", new { id = comment.Id }, new { @class = "btn btn-small btn-share" })
                                 }
+                                
                             </div>
                         </div>
                         <hr/>
@@ -115,7 +115,7 @@
                                 @using (Html.BeginForm("Create", "Comments", FormMethod.Post))
                                 {
                                     @Html.AntiForgeryToken()
-                                    @Html.Hidden("BlogPostId", Model.blogPost.Id)
+                                    @Html.Hidden("BlogPostId", Model.blogPost.Id)  // Maybe shouldn't put this in here... can create a vulnerability
                                     @Html.HiddenFor(model => model.blogPost.Slug)
                                     <div class="row">
                                         <div class="col-md-12">
@@ -168,20 +168,20 @@
                                @if (item.MediaURL == null)
                                 {
                                     <a href="javascript:;" class="pull-left">
-                                        <img class="img-thumbnail" src="~/Content/defaultImage.jpg" alt="" />
+                                        <img style="width:120px;" src="~/Content/defaultImage.jpg" alt="" />
                                     </a>
                                 }
                                 else
                                 {
                                     <a href="javascript:;" class="pull-left">
-                                        <img class="img-thumbnail" src="@item.MediaURL" alt="" />
+                                        <img style="width:120px;" src="@item.MediaURL" alt="" />
                                     </a>
                                 }
-                                    <div class="media-body">
-                                        <h5 class="media-heading"><a href="javascript:;">@item.Created.ToString("MM/dd/yyyy") </a></h5>
-                                        <p>@item.Title</p>
-
-                                    </div>
+                                <div class="media-body">
+                                    <h5 class="media-heading">@item.Created.ToString("MM/dd/yyyy")</h5>
+                                    <p style="color:#837f7e; line-height:1em;">@Html.ActionLink(item.Title, "Details", new { slug = item.Slug })</p>
+     
+                                </div>
                                 </div>
                             }
                         </div>
@@ -195,7 +195,7 @@
                         <ul>
                             @foreach (var item in Model.recentComments)
                             {
-                                <li><a href="javascript:;"><h5 class="comments"><i class=" fa fa-comments-o"></i> @item.CommentBody </h5></a></li>
+                            <li style="display:inline-block; line-height:1em;"><i class=" fa fa-comments-o"></i>@Html.ActionLink(item.BlogPost.Title, "Details", new { slug = item.BlogPost.Slug }) <p style="line-height:1em;">@item.CommentBody</p></li>
                             }
                         </ul>
                     </div>
