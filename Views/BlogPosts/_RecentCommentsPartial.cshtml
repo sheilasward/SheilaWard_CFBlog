@@ -1,5 +1,11 @@
 ﻿@model IEnumerable<SheilaWard_CFBlog.Models.Comment>
 
+<style>
+    .blog-post ul li a {
+        line-height:1em;
+    }
+</style>
+
     <div class="panel">
         <div class="panel-body">
             <div class="blog-post">
@@ -7,7 +13,11 @@
                 <ul>
                     @foreach (var item in Model)
                     {
-                    <li style="display:inline-block; line-height:1em;"><i class=" fa fa-comments-o"></i>@Html.ActionLink(item.BlogPost.Title, "Details", new { slug = item.BlogPost.Slug }) <p style="line-height:1em;">@item.CommentBody</p></li>
+                        <li style="line-height:1em;">
+                            <span><i class=" fa fa-comments-o"></i>@item.BlogPost.Title &emsp; @item.BlogPost.Created.ToString("MM/dd/yyyy")</span>
+                            <div style="padding: 5px 0 5px 30px;">@Html.ActionLink(item.CommentBody, "Details", new { style = "line-height:1em;", slug = item.BlogPost.Slug });</div>
+                        </li>
+                        <li>&nbsp;</li>
                     }
                 </ul>
             </div>

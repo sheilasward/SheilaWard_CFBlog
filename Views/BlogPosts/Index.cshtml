@@ -70,14 +70,6 @@
             <div class="text-center">
                 <ul class="pagination">
                     @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchStr = ViewBag.Search }));
-                    @*Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount  @Html.PagedListPager(Model, page => Url.Action("Index", new { page }));*@
-                    @*<li><a href="#">PREV</a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">NEXT</a></li>*@
                 </ul>
             </div>
         </div>
@@ -97,76 +89,30 @@
 
             @Html.Partial("_RecentBlogPostsPartial", DataUtilities.GetBlogPosts())
 
-            @*<div class="panel">
-            <div class="panel-body">
-                <div class="blog-post">
-                    <h3>Latest Blog Posts</h3>
-                    <div class="media">
-                        <a href="javascript:;" class="pull-left">
-                            <img src="~/images/blog-thumb-1.jpg" alt="" class=" " />
-
-                        </a>
-                        <div class="media-body">
-                            <h5 class="media-heading"><a href="javascript:;">02 May 2013 </a></h5>
-                            <p>
-                                Donec id elit non mi porta gravida at eget metus amet int
-                            </p>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <a href="javascript:;" class="pull-left">
-                            <img alt="" src="~/images/blog-thumb-2.jpg" class=" " />
-
-                        </a>
-                        <div class="media-body">
-                            <h5 class="media-heading"><a href="javascript:;">02 May 2013 </a></h5>
-                            <p>
-                                Donec id elit non mi porta gravida at eget metus amet int
-                            </p>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <a href="javascript:;" class="pull-left">
-                            <img alt="" src="~/images/blog-thumb-3.jpg" class=" " />
-
-                        </a>
-                        <div class="media-body">
-                            <h5 class="media-heading"><a href="javascript:;">02 May 2013 </a></h5>
-                            <p>
-                                Donec id elit non mi porta gravida at eget metus amet int
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>*@
 
             @Html.Partial("_RecentCommentsPartial", DataUtilities.GetComments())
-
-            @*<div class="panel">
-            <div class="panel-body">
-                <div class="blog-post">
-                    <h3>recent comments</h3>
-                    <ul>
-                        <li><a href="javascript:;"><i class=" fa fa-comments-o"></i> admin on Vestiblulum quis dolor </a></li>
-                        <li><a href="javascript:;"><i class=" fa fa-comments-o"></i> admin on Nam sed arcu tellus</a></li>
-                        <li><a href="javascript:;"><i class=" fa fa-comments-o"></i> monster002 on Fringilla ut vel ipsum </a></li>
-                        <li><a href="javascript:;"><i class=" fa fa-comments-o"></i> admin on Vestiblulum quis dolor sit</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>*@
 
             <div class="panel">
                 <div class="panel-body">
                     <div class="blog-post">
                         <h3>blog archive</h3>
                         <ul>
-                            <li><a href="javascript:;"><i class=" fa fa-angle-right"></i> May 2013</a></li>
-                            <li><a href="javascript:;"><i class=" fa fa-angle-right"></i> April 2013</a></li>
-                            <li><a href="javascript:;"><i class=" fa fa-angle-right"></i> March 2013</a></li>
-                            <li><a href="javascript:;"><i class=" fa fa-angle-right"></i> February 2013</a></li>
-                            <li><a href="javascript:;"><i class=" fa fa-angle-right"></i> January 2013</a></li>
+
+                            @foreach (IGrouping<string, BlogPost> blogPost in BlogPostHelper.BlogsByMonth())
+                            {
+                                <li><a href="javascript:;"><i class=" fa fa-angle-right"></i> @blogPost.Key</a></li>
+                                // Print the key value of the IGrouping.
+                                //Console.WriteLine(blogPost.Key);
+                                // Iterate over each value in the
+                                // IGrouping and print the value.
+                                foreach (var blog in blogPost)
+                                {
+                                    @blog.Created.ToString("MM/dd/yyyy") @blog.Title <br />
+                                    //Console.WriteLine("  {0}", title);
+                                }
+
+                            }
+
                         </ul>
                     </div>
                 </div>

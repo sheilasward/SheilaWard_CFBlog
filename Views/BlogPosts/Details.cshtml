@@ -1,4 +1,5 @@
 ﻿@using SheilaWard_CFBlog.Models
+@using SheilaWard_CFBlog.Helpers
 @using Microsoft.AspNet.Identity
 @model SheilaWard_CFBlog.ViewModels.DetailVM
 
@@ -6,6 +7,7 @@
 @{
     ViewBag.Title = "Details";
 }
+
 
     <div class="section-title">
         <h1 class="section-heading">Blog Details</h1>
@@ -157,15 +159,17 @@
 
             </div>
 
-            <div class="panel">
-                <div class="panel-body">
-                    <div class="blog-post">
-                        <h3>Latest Blog Posts</h3>
-                        <div>
-                           @foreach (var item in Model.recentPosts)
-                            {
-                                <div class="media">
-                               @if (item.MediaURL == null)
+            @Html.Partial("_RecentBlogPostsPartial", DataUtilities.GetBlogPosts())
+
+            @*<div class="panel">
+            <div class="panel-body">
+                <div class="blog-post">
+                    <h3>Latest Blog Posts</h3>
+                    <div>
+                        @foreach (var item in Model.recentPosts)
+                        {
+                            <div class="media">
+                                @if (item.MediaURL == null)
                                 {
                                     <a href="javascript:;" class="pull-left">
                                         <img style="width:120px;" src="~/Content/defaultImage.jpg" alt="" />
@@ -180,27 +184,35 @@
                                 <div class="media-body">
                                     <h5 class="media-heading">@item.Created.ToString("MM/dd/yyyy")</h5>
                                     <p style="color:#837f7e; line-height:1em;">@Html.ActionLink(item.Title, "Details", new { slug = item.Slug })</p>
-     
+
                                 </div>
-                                </div>
-                            }
-                        </div>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
-            <div class="panel">
-                <div class="panel-body">
-                    <div class="blog-post">
-                        <h3>recent comments</h3>
-                        <ul>
-                            @foreach (var item in Model.recentComments)
-                            {
-                            <li style="display:inline-block; line-height:1em;"><i class=" fa fa-comments-o"></i>@Html.ActionLink(item.BlogPost.Title, "Details", new { slug = item.BlogPost.Slug }) <p style="line-height:1em;">@item.CommentBody</p></li>
-                            }
-                        </ul>
-                    </div>
+        </div>*@
+
+            @Html.Partial("_RecentCommentsPartial", DataUtilities.GetComments())
+
+            @*<div class="panel">
+            <div class="panel-body">
+                <div class="blog-post">
+                    <h3>recent comments</h3>
+                    <ul>
+                        @foreach (var item in Model.recentComments)
+                        {
+                            <li style="line-height:1em;">
+                                <span><i class=" fa fa-comments-o"></i>@item.BlogPost.Title &emsp; @item.BlogPost.Created.ToString("MM/dd/yyyy")</span>
+                                <div style="padding: 5px 0 5px 30px;">@Html.ActionLink(item.CommentBody, "Details", new { slug = item.BlogPost.Slug })</div>
+                            </li>
+                            <li>&nbsp;</li>
+                        }
+                    </ul>
                 </div>
             </div>
+        </div>*@
+
             <div class="panel">
                 <div class="panel-body">
                     <div class="blog-post">

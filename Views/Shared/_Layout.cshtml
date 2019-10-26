@@ -4,20 +4,6 @@
     <meta charset="utf-8">
     <title>Blog Listing</title>
 
-    @*<link href="~/css/royal_preloader.css" type="text/css" rel="stylesheet">
-
-        <link href="~/css/rev-slider-settings.css" type="text/css" rel="stylesheet">
-        <!-- MEGAFOLIO GALLERY  CSS -->
-        <link href="~/css/megafolio-style.css" type="text/css" rel="stylesheet">
-        <link href="~/css/megafolio-settings.css" type="text/css" rel="stylesheet">
-        <!-- Magnific Popup core CSS file -->
-        <link href="~/css/magnific-popup.css" type="text/css" rel="stylesheet">
-        <!-- Owl Carousel Assets -->
-        <link href="~/css/owl.carousel.css" type="text/css" rel="stylesheet">
-        <link href="~/css/owl.theme.css" type="text/css" rel="stylesheet">
-        <link href="~/css/owl.transitions.css" type="text/css" rel="stylesheet">*@
-
-
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
 
     <link href="~/Content/animate.css" rel="stylesheet" />
@@ -36,20 +22,7 @@
     <link href="https://fonts.googleapis.com/css?family=Dancing+Script&display=swap" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Raleway:900,300,200,100' rel='stylesheet' type='text/css'>
-
 </head>
-
-
-
-@*<head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>@ViewBag.Title - My ASP.NET Application</title>
-        @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")
-
-    </head>*@
-
 
 <body class="blog-body">
     <div class="navigation clearfix">
@@ -66,37 +39,11 @@
                                 <a class="sticky-logo" href='@Url.Action("Index", "Home")'>
                                     <img src="~/images/coderFoundry2.png" alt="" />
                                 </a>
-
-                                    @*<a class="sticky-logo" href="index.html">
-                                        <img src="~/images/coderFoundry2.png" alt="" />
-                                    </a>*@
-
-
-
-                                    @*@Html.ActionLink("Coder Foundry", "Index", "Home", new { area = "" }, new { @class = "navbar-brand app-brand" })*@
                             </div>
                             <div class="navbar-collapse collapse ddsmoothmenu" id="smoothmenu1">
                                 <ul class="nav navbar-nav top-nav sf-menu">
                                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                                     <li>@Html.ActionLink("BlogPosts", "Index", "BlogPosts")</li>
-
-                                    @*<li><a href="index.html#slides">Home</a></li>
-                                        <li><a href="index.html#about-me">About Me</a></li>
-                                        <li><a href="index.html#skill-section">Skill</a></li>
-                                        <li><a href="index.html#experiences">Experiences</a></li>
-                                        <li><a href="index.html#education">Education</a></li>
-                                        <li><a href="index.html#portfolio">Portfolio</a></li>
-                                        <li><a href="index.html#testimonial">Testimonial</a></li>
-                                        <li>
-                                            <a href="index.html#blog">Blog</a>
-                                            <ul>
-                                                <li><a href="index.html#blog">Blog List</a></li>
-                                                <li><a href="blog_listing.html" class="external">Blog Page</a></li>
-                                                <li><a href="blog_details.html" class="external">Blog Details Page</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="index.html#contact">Contact</a></li>*@
-
                                 </ul>
                                 @Html.Partial("_LoginPartial")
                             </div>
@@ -106,27 +53,6 @@
             </div>
         </div>
     </div>
-
-    @*<body>
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("Coder Foundry", "Index", "Home", new { area = "" }, new { @class = "navbar-brand app-brand" })
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("BlogPosts", "Index", "BlogPosts")</li>
-                    </ul>
-                    @Html.Partial("_LoginPartial")
-                </div>
-            </div>
-        </div>*@
 
     <div class="container body-content">
         @RenderBody()
@@ -244,9 +170,6 @@
     <script type="text/javascript">
         SyntaxHighlighter.all()
     </script>
-
-
-
 
     <script src="~/Scripts/tinymce/tinymce.min.js"></script>
     <script src="~/Scripts/tinymce/jquery.tinymce.min.js"></script>
